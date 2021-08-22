@@ -7,7 +7,9 @@ vector<vector<int> > triplets(vector<int> arr,int targetSum){
 	//Logic 
 	int n = arr.size();
 	sort(arr.begin(),arr.end());
-	vector<vector<int> > result;
+	set<vector<int> > result; // To make sure each triplet is unique
+	vector<vector<int>> ans;
+	
 
 	// Pick every a[i], pair sum for remaining part
 	for(int i=0; i<=n-3;i++){
@@ -22,7 +24,7 @@ vector<vector<int> > triplets(vector<int> arr,int targetSum){
 			current_sum += arr[k];
 
 			if(current_sum==targetSum){
-				result.push_back({arr[i],arr[j],arr[k]});
+				result.insert({arr[i],arr[j],arr[k]});
 				j++;
 				k--;
 			}
@@ -35,7 +37,10 @@ vector<vector<int> > triplets(vector<int> arr,int targetSum){
 		}
 
 	}
-	return result;
+	for(auto i: result){
+		ans.push_back(i);
+	}
+	return ans;
 
 }
 
